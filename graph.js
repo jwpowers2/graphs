@@ -66,6 +66,31 @@ function Graph() {
         
         
     }
+    this.DFS_Util = function(v,visited){
+        visited[v] = true;
+        console.log(v);
+        //Recur for all the vertices adjacent to this vertex
+        for (let i of this.graph[v]){
+            if (visited[i] === false){
+                this.DFS_Util(i, visited)
+            }
+            
+        }
+    }
+
+    this.DFS = function(v){
+
+        //Mark all the vertices as not visited
+        var visited = {};
+        Object.keys(this.graph).forEach(function(element){
+        	visited[element] = false;
+        })
+ 
+        //Call the recursive helper function to print
+        //DFS traversal
+        this.DFS_Util(v,visited);
+
+    }
 } 
 //Driver code
  
@@ -81,3 +106,4 @@ g.addEdge('Olympia', 'Olympia');
 
 
 g.BFS('Seattle');
+g.DFS('Seattle');
