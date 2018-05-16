@@ -1,38 +1,27 @@
-// geocode 
-// what is H?
- var platform = new H.service.Platform({
-  'app_id': '{YOUR_APP_ID}',
-  'app_code': '{YOUR_APP_CODE}'
-});
+var axios = require('axios');
+var mode   = process.env.NODE_ENV;
+var apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
-var geocodingParams = {
-    searchText: '200 S Mathilda Ave, Sunnyvale, CA'
-  };
+// make a class and export it to use in graph.js
 
-// Define a callback function to process the geocoding response:
-var onResult = function(result) {
-  var locations = result.Response.View[0].Result,
-    position,
-    marker;
-  // Add a marker for each location found
-  for (i = 0;  i < locations.length; i++) {
-  position = {
-    lat: locations[i].Location.DisplayPosition.Latitude,
-    lng: locations[i].Location.DisplayPosition.Longitude
-  };
-  //marker = new H.map.Marker(position);
-  //map.addObject(marker);
-  }
-};
+function Geocode(address){
+    this.address = address;
+    this.getLatLong = function(){
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: this.address,
+          key: apiKey
+        }
+      })
+      .then(function (response) {
+        console.log(response.data.results[0].geometry.location);
+        return response.data.results[0].geometry.location;
+      })
+      .catch(function (error) {
+        //console.log(error);
+        return error;
+      });
+    }
+}
 
-// Get an instance of the geocoding service:
-var geocoder = platform.getGeocodingService();
-
-// Call the geocode method with the geocoding parameters,
-// the callback and an error callback function (called if a
-// communication error occurs):
-geocoder.geocode(geocodingParams, onResult, function(e) {
-  alert(e);
-});
-A successful geocoding request allows the code to display a marker for each location found as shown in the image below:
-
+module.exports = Geocode;

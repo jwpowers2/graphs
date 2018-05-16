@@ -1,0 +1,23 @@
+{
+  "name": "graphs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "geocode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwpowers2/graphs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwpowers2/graphs/issues"
+  },
+  "homepage": "https://github.com/jwpowers2/graphs#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
