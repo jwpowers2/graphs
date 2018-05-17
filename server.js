@@ -39,7 +39,7 @@ function setup(){
 
 
 function BFS(start,end){
-
+    graph.reset();
 	var start = graph.setStart(start);
 	var end = graph.setEnd(end);
 

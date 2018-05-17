@@ -37,6 +37,13 @@ Graph.prototype.getNode = function(neighbor){
 
 }
 
+Graph.prototype.reset = function(){
+	for (let i=0;i<this.nodes.length;i++){
+		this.nodes[i].searched = false;
+		this.nodes[i].parent = null;
+	}
+}
+
 module.exports = Graph;
 
 
